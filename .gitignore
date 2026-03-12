@@ -1,0 +1,16 @@
+build/
+cmake-build-*/
+.idea/
+.vs/
+out/
+vcpkg/
+vcpkg_installed/
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.suo
+*.user
+*.a
+*.so
+*.dylib
