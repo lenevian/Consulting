@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | HSE Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="/" style="text-decoration:none; color:inherit;">HSE<span>Consulting</span></a></div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/profile" id="nav-profile" style="display:none;">Profile</a>
+            <a href="/admin" id="nav-admin" class="active" style="display:none;">Admin</a>
+            <a href="/orders" id="nav-orders" style="display:none;">New Order</a>
+            <a href="/support">Support / FAQ</a>
+            <a href="#" id="nav-logout" style="display:none;" onclick="logout()">Logout</a>
+        </div>
+    </nav>
+
+    <div class="services">
+        <h2>Admin Dashboard</h2>
+        <p style="text-align: center; color: var(--text-muted);">Manage all system project requests and status updates.
+        </p>
+
+        <div class="profile-card" style="margin-top: 2rem; max-width: 1000px;">
+            <div style="display: flex; gap: 1rem; margin-top: 2rem; margin-bottom: 1rem;">
+                <input type="text" id="admin-search" placeholder="Search by description or author..."
+                    style="flex-grow: 1; padding: 0.5rem; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 4px; color: white;">
+                <select id="admin-status-filter"
+                    style="padding: 0.5rem; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 4px; color: white;">
+                    <option value="">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Open">Open</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+                <button onclick="loadAllOrders()" class="btn btn-secondary" style="padding: 0.5rem 1rem;">Apply</button>
+            </div>
+
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Author</th>
+                        <th>Type / Service</th>
+                        <th>Description</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="admin-orders-list">
+                    <tr>
+                        <td colspan="6" style="text-align:center;">Loading orders...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if (!user || user.role !== 'Admin') {
+                window.location.href = '/login';
+                return;
+            }
+            loadAllOrders();
+        });
+    </script>
+</body>
+
+</html>
