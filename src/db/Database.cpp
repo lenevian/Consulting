@@ -6,7 +6,7 @@
 using namespace std;
 
 Database::Database(std::string userPath, std::string reqPath)
-    : userDbPath(std::move(userPath)), requestDbPath(std::move(reqPath)) {
+        : userDbPath(std::move(userPath)), requestDbPath(std::move(reqPath)) {
   loadUsers();
   loadRequests();
 }
@@ -38,7 +38,7 @@ void Database::loadUsers() {
       std::string last = "";
 
       if (fields.size() == 5) {
-        first = fields[4]; 
+        first = fields[4];
       } else {
         first = fields[4];
         last = fields[5];
@@ -48,7 +48,7 @@ void Database::loadUsers() {
         users.push_back(std::make_shared<Admin>(name, hash, mail, first, last));
       } else {
         users.push_back(
-            std::make_shared<Client>(name, hash, mail, first, last));
+                std::make_shared<Client>(name, hash, mail, first, last));
       }
     }
   }
@@ -70,18 +70,18 @@ void Database::loadRequests() {
         std::getline(iss, author, ',') && std::getline(iss, desc, ',') &&
         std::getline(iss, status, ',') && std::getline(iss, extra)) {
 
-      
+
       std::string time = "";
       size_t firstPipe = extra.find('|');
       size_t firstComma = extra.find(',');
 
-      
-      
-      
 
-      
-      
-      
+
+
+
+
+
+
 
       int id = std::stoi(idStr);
       if (id >= nextRequestId)
@@ -92,7 +92,7 @@ void Database::loadRequests() {
         std::string response = "";
         std::string time = "";
 
-        
+
         size_t p1 = extra.find('|');
         if (p1 != std::string::npos) {
           category = extra.substr(0, p1);
@@ -106,13 +106,13 @@ void Database::loadRequests() {
           }
         }
         requests.push_back(std::make_unique<SupportRequest>(
-            id, author, desc, status, category, response, time));
+                id, author, desc, status, category, response, time));
       } else if (type == "Order") {
         std::string serviceType = extra;
         double budget = 0.0;
         std::string time = "";
 
-        
+
         std::vector<std::string> parts;
         std::stringstream ss(extra);
         std::string p;
@@ -132,7 +132,7 @@ void Database::loadRequests() {
         }
 
         requests.push_back(std::make_unique<OrderRequest>(
-            id, author, desc, status, serviceType, budget, time));
+                id, author, desc, status, serviceType, budget, time));
       }
     }
   }
@@ -141,7 +141,7 @@ void Database::loadRequests() {
 std::optional<std::shared_ptr<User>>
 Database::findUser(const std::string &username) const {
   auto it = std::find_if(users.begin(), users.end(), [&](const auto &u) {
-    return u->getUsername() == username;
+      return u->getUsername() == username;
   });
 
   if (it != users.end()) {
