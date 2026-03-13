@@ -76,13 +76,6 @@ void Database::loadRequests() {
       size_t firstComma = extra.find(',');
 
 
-
-
-
-
-
-
-
       int id = std::stoi(idStr);
       if (id >= nextRequestId)
         nextRequestId = id + 1;
