@@ -1,12 +1,12 @@
 #pragma once
 
-#include "../exceptions/ConsultingException.hpp"
-#include "../models/Admin.hpp"
-#include "../models/Client.hpp"
-#include "../models/OrderRequest.hpp"
-#include "../models/Request.hpp"
-#include "../models/SupportRequest.hpp"
-#include "../models/User.hpp"
+#include "exceptions/ConsultingException.hpp"
+#include "models/Admin.hpp"
+#include "models/Client.hpp"
+#include "models/OrderRequest.hpp"
+#include "models/Request.hpp"
+#include "models/SupportRequest.hpp"
+#include "models/User.hpp"
 
 #include <fstream>
 #include <iostream>
