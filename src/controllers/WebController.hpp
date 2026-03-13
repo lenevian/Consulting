@@ -1,5 +1,5 @@
 #pragma once
-#include "../db/Database.hpp"
+#include "db/Database.hpp"
 #include <drogon/HttpController.h>
 #include <memory>
 
