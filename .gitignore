@@ -14,3 +14,5 @@ vcpkg_installed/
 *.a
 *.so
 *.dylib
+vcpkg.json
+.idea/vcs.xml

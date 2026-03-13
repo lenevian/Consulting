@@ -16,6 +16,7 @@ endif()
 
 find_package(Drogon CONFIG REQUIRED)
 
+
 if(NOT MSVC)
     foreach(_tgt Drogon::Drogon Trantor::Trantor jsoncpp_lib)
         if(TARGET ${_tgt})
@@ -27,9 +28,9 @@ endif()
 find_package(GTest CONFIG REQUIRED)
 
 set(SOURCES
-    src/main.cpp
-    src/db/Database.cpp
-    src/controllers/WebController.cpp
+        src/main.cpp
+        src/db/Database.cpp
+        src/controllers/WebController.cpp
 )
 
 add_executable(Consulting ${SOURCES})
@@ -47,11 +48,11 @@ target_include_directories(Consulting PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_link_libraries(Consulting PRIVATE Drogon::Drogon)
 
 enable_testing()
-add_executable(ConsultingTests 
-    tests/TestUser.cpp 
-    tests/TestDatabase.cpp 
-    tests/TestVariant.cpp
-    src/db/Database.cpp
+add_executable(ConsultingTests
+        tests/TestUser.cpp
+        tests/TestDatabase.cpp
+        tests/TestVariant.cpp
+        src/db/Database.cpp
 )
 target_include_directories(ConsultingTests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
 target_link_libraries(ConsultingTests PRIVATE GTest::gtest GTest::gtest_main)
