@@ -1,5 +1,5 @@
 #include "WebController.hpp"
-#include "utils/ConstexprUtils.hpp"
+#include "../utils/ConstexprUtils.hpp"
 #include <iostream>
 
 using namespace drogon;
@@ -27,8 +27,8 @@ std::string WebController::resolvePath(const std::string &path) {
 }
 
 void WebController::serveFile(
-    const HttpRequestPtr &req,
-    std::function<void(const HttpResponsePtr &)> &&callback) {
+        const HttpRequestPtr &req,
+        std::function<void(const HttpResponsePtr &)> &&callback) {
   std::string filePath = "./public/" + resolvePath(req->path());
   auto resp = HttpResponse::newFileResponse(filePath);
   if (!resp) {
@@ -40,8 +40,8 @@ void WebController::serveFile(
 }
 
 void WebController::login(
-    const HttpRequestPtr &req,
-    std::function<void(const HttpResponsePtr &)> &&callback) {
+        const HttpRequestPtr &req,
+        std::function<void(const HttpResponsePtr &)> &&callback) {
   auto json = req->getJsonObject();
   auto resp = HttpResponse::newHttpResponse();
 
@@ -83,8 +83,8 @@ void WebController::login(
 }
 
 void WebController::registerUser(
-    const HttpRequestPtr &req,
-    std::function<void(const HttpResponsePtr &)> &&callback) {
+        const HttpRequestPtr &req,
+        std::function<void(const HttpResponsePtr &)> &&callback) {
   auto json = req->getJsonObject();
   auto resp = HttpResponse::newHttpResponse();
 
@@ -105,7 +105,7 @@ void WebController::registerUser(
   try {
     db->addUser(std::make_shared<Client>(username, std::to_string(passHash),
                                          email, firstName, lastName));
-    db->saveAll(); 
+    db->saveAll();
     auto jsonResp = HttpResponse::newHttpJsonResponse(Json::Value("success"));
     callback(jsonResp);
   } catch (const DatabaseException &e) {
@@ -116,8 +116,8 @@ void WebController::registerUser(
 }
 
 void WebController::getOrders(
-    const HttpRequestPtr &req,
-    std::function<void(const HttpResponsePtr &)> &&callback) {
+        const HttpRequestPtr &req,
+        std::function<void(const HttpResponsePtr &)> &&callback) {
   std::string username = req->getHeader("X-Username");
   if (username.empty()) {
     auto resp = HttpResponse::newHttpResponse();
@@ -154,8 +154,8 @@ void WebController::getOrders(
 }
 
 void WebController::createOrder(
-    const HttpRequestPtr &req,
-    std::function<void(const HttpResponsePtr &)> &&callback) {
+        const HttpRequestPtr &req,
+        std::function<void(const HttpResponsePtr &)> &&callback) {
   auto json = req->getJsonObject();
   auto resp = HttpResponse::newHttpResponse();
 
@@ -194,8 +194,8 @@ void WebController::createOrder(
 }
 
 void WebController::getAllOrders(
-    const HttpRequestPtr &req,
-    std::function<void(const HttpResponsePtr &)> &&callback) {
+        const HttpRequestPtr &req,
+        std::function<void(const HttpResponsePtr &)> &&callback) {
   std::string adminUser = req->getHeader("X-Username");
   auto userOpt = db->findUser(adminUser);
 
@@ -244,8 +244,8 @@ void WebController::getAllOrders(
 }
 
 void WebController::updateOrderStatus(
-    const HttpRequestPtr &req,
-    std::function<void(const HttpResponsePtr &)> &&callback) {
+        const HttpRequestPtr &req,
+        std::function<void(const HttpResponsePtr &)> &&callback) {
   auto json = req->getJsonObject();
   std::string adminUser = req->getHeader("X-Username");
   auto userOpt = db->findUser(adminUser);
@@ -284,8 +284,8 @@ void WebController::updateOrderStatus(
   callback(jsonResp);
 }
 void WebController::createSupport(
-    const HttpRequestPtr &req,
-    std::function<void(const HttpResponsePtr &)> &&callback) {
+        const HttpRequestPtr &req,
+        std::function<void(const HttpResponsePtr &)> &&callback) {
   auto json = req->getJsonObject();
   auto resp = HttpResponse::newHttpResponse();
 
@@ -303,8 +303,8 @@ void WebController::createSupport(
 
   try {
     db->addRequest(
-        std::make_unique<SupportRequest>(db->getNextRequestId(), author, desc,
-                                         "Open", category, "", getTimeStr()));
+            std::make_unique<SupportRequest>(db->getNextRequestId(), author, desc,
+                                             "Open", category, "", getTimeStr()));
     db->saveAll();
     auto jsonResp = HttpResponse::newHttpJsonResponse(Json::Value("success"));
     callback(jsonResp);
@@ -316,8 +316,8 @@ void WebController::createSupport(
 }
 
 void WebController::respondToSupport(
-    const HttpRequestPtr &req,
-    std::function<void(const HttpResponsePtr &)> &&callback) {
+        const HttpRequestPtr &req,
+        std::function<void(const HttpResponsePtr &)> &&callback) {
   auto json = req->getJsonObject();
   std::string adminUser = req->getHeader("X-Username");
   auto userOpt = db->findUser(adminUser);
