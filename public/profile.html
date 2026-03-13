@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile | HSE Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="/" style="text-decoration:none; color:inherit;">HSE<span>Consulting</span></a></div>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/login" id="nav-login">Login</a>
+            <a href="/register" id="nav-register">Register</a>
+            <a href="/profile" id="nav-profile" class="active" style="display:none;">Profile</a>
+            <a href="/admin" id="nav-admin" style="display:none;">Admin</a>
+            <a href="/orders" id="nav-orders" style="display:none;">New Order</a>
+            <a href="/support">Support / FAQ</a>
+            <a href="#" id="nav-logout" style="display:none;" onclick="logout()">Logout</a>
+        </div>
+    </nav>
+
+    <div class="services">
+        <h2>Your Profile</h2>
+        <div id="profile-content" style="max-width: 1100px; margin: 0 auto; text-align: left;">
+            <div class="card" id="user-info">
+                
+            </div>
+
+            <h3 style="margin-top: 3rem;">Active Orders</h3>
+
+            <div style="display: flex; gap: 1rem; margin-top: 1rem; margin-bottom: 1rem;">
+                <input type="text" id="profile-search" placeholder="Search by description..."
+                    style="flex-grow: 1; padding: 0.5rem; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 4px; color: white;">
+                <select id="profile-status-filter"
+                    style="padding: 0.5rem; background: var(--bg-dark); border: 1px solid var(--border); border-radius: 4px; color: white;">
+                    <option value="">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Accepted">Accepted</option>
+                    <option value="Completed">Completed</option>
+                    <option value="Resolved">Resolved</option>
+                    <option value="Cancelled">Cancelled</option>
+                </select>
+            </div>
+
+            <div class="card" style="width: 100%;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Service Area</th>
+                            <th>Description</th>
+                            <th>Status</th>
+                            <th>Budget ($)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="orders-list">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+
+</html>
