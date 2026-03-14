@@ -1,0 +1,2 @@
+To run our project you need to install vcpkg from git hub to install and configure drogon (backend c++ framework)
+gtests for testing
